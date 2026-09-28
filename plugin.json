@@ -1,0 +1,18 @@
+{
+  "format": 1,
+  "id": "lonelyice.waystones",
+  "version": "1.0.0",
+  "name": { "en": "Kirin Tor waystones", "ru": "Кристаллы Кирин-Тора" },
+  "description": {
+    "en": "A network of teleport crystals: attune to a crystal once, then travel between the ones you know.",
+    "ru": "Сеть телепортационных кристаллов: настройтесь на кристалл один раз и перемещайтесь между известными."
+  },
+  "authors": [ "LonelyIceProject" ],
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://github.com/LonelyIceProject/mod-lonelyice-waystones",
+  "core": { "abi": "lonelyice-ac-1" },
+  "platforms": [ "windows-x64" ],
+  "server": { "library": "lonelyice_waystones" },
+  "databases": { "world": "data/sql/db-world", "characters": "data/sql/db-characters" },
+  "client": { "addons": [ "client/addons/KirinTorWaystones" ] }
+}

@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Kirin Tor Waycrystals
+## Title-ruRU: Путевые кристаллы Кирин-Тора
+## Notes: Waycrystal network on the world map: click an attuned crystal to translocate. /ways lists them.
+## Notes-ruRU: Путевые кристаллы на карте мира: щелчок по открытому кристаллу переносит к нему. /ways - список.
+## Author: LonelyIceProject
+## Version: 1.0
+
+Data.lua
+Core.lua
