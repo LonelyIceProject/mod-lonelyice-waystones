@@ -1,0 +1,34 @@
+{
+  "ids": {
+    "translocation": { "table": "Spell.dbc", "copy": 44080 }
+  },
+  "patches": [
+    {
+      "table": "Spell.dbc",
+      "rows": [
+        {
+          "id": "@translocation",
+          "comment": "Translocation: a 5 s cast with the Dalaran teleport icon, based on 44080 (Teleport: Zul'Aman Instance).",
+          "set": {
+            "28": 6,
+            "133": 3167,
+            "136": { "en": "Translocation", "ru": "Транслокация" },
+            "153": { "en": "" },
+            "170": { "en": "Translocates you to the chosen Kirin Tor waycrystal.", "ru": "Перемещает вас к выбранному путевому кристаллу Кирин-Тора." },
+            "187": { "en": "" }
+          }
+        }
+      ]
+    }
+  ],
+  "install": {
+    "world": [
+      "INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES ({{id:translocation}}, 'spell_custom_translocation')"
+    ]
+  },
+  "uninstall": {
+    "world": [
+      "DELETE FROM `spell_script_names` WHERE `ScriptName` = 'spell_custom_translocation'"
+    ]
+  }
+}

@@ -9,9 +9,10 @@
  * - The KirinTorWaystones client addon draws the crystals on the world map and asks for a
  *   translocation from anywhere by clicking one (addon messages with prefix "KTWS").
  *
- * Translocation is a 5 s cast of spell 44080 ("Teleport: Zul'Aman Instance", unused otherwise),
- * renamed client-side by tools/make_client_patch.py. Its own teleport effect is replaced here, so
- * movement, combat and damage interrupt it like any cast.
+ * Translocation is the plugin's own spell: data/patches.json adds a 5 s copy of spell 44080 ("Teleport: Zul'Aman
+ * Instance") to the client and the server under an id given out when the patch was installed, and binds
+ * spell_custom_translocation to it. Its teleport effect is replaced here, so movement, combat and damage
+ * interrupt it like any cast.
  */
 
 #include "Chat.h"
@@ -19,6 +20,7 @@
 #include "DBCStores.h"
 #include "DatabaseEnv.h"
 #include "Group.h"
+#include "Log.h"
 #include "ObjectAccessor.h"
 #include "Player.h"
 #include "ScriptMgr.h"
@@ -44,11 +46,23 @@ namespace
     // Keep in sync with tools/make_waystones.py
     constexpr uint32 NPC_WAYSTONE = 9100001;
     constexpr ObjectGuid::LowType WAYSTONE_GUID_BASE = 9100000;
-    constexpr uint32 SPELL_TRANSLOCATION = 44080;
-    constexpr uint32 CAST_TIME_INDEX_5S = 6;
     constexpr float ATTUNE_DISTANCE = 15.0f;
     constexpr char const* ADDON_PREFIX = "KTWS";
     constexpr uint32 ZONES_PER_PAGE = 20;
+
+    // The id of the Translocation spell (world.plugin_ids), 0 while the plugin's patches are not installed.
+    uint32 TranslocationSpell()
+    {
+        static uint32 const id = []
+        {
+            QueryResult r = WorldDatabase.Query("SELECT `id` FROM `plugin_ids` WHERE `plugin` = 'lonelyice.waystones' AND `name` = 'translocation'");
+            uint32 v = r ? r->Fetch()[0].Get<uint32>() : 0;
+            if (!v)
+                LOG_ERROR("module", "lonelyice.waystones: no id for the Translocation spell, its patches are not installed");
+            return v;
+        }();
+        return id;
+    }
 
     enum GossipSender : uint32
     {
@@ -209,7 +223,7 @@ namespace
             std::lock_guard<std::mutex> guard(sPlayerLock);
             sPendingTranslocation[player->GetGUID().GetCounter()] = id;
         }
-        player->CastSpell(player, SPELL_TRANSLOCATION, false);
+        player->CastSpell(player, TranslocationSpell(), false);
     }
 
     void SendAddon(Player* player, std::string const& body)
@@ -488,11 +502,7 @@ public:
     void OnStartup() override
     {
         LoadWaystones();
-
-        // FFXIV-length cast instead of the DBC's 10 s; the client shows whatever the server sends
-        if (SpellInfo const* info = sSpellMgr->GetSpellInfo(SPELL_TRANSLOCATION))
-            if (SpellCastTimesEntry const* castTime = sSpellCastTimesStore.LookupEntry(CAST_TIME_INDEX_5S))
-                const_cast<SpellInfo*>(info)->CastTimeEntry = castTime;
+        TranslocationSpell();
     }
 };
 

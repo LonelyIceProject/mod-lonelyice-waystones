@@ -14,5 +14,6 @@
   "platforms": [ "windows-x64" ],
   "server": { "library": "lonelyice_waystones" },
   "databases": { "world": "data/sql/db-world", "characters": "data/sql/db-characters" },
+  "patches": "data/patches.json",
   "client": { "addons": [ "client/addons/KirinTorWaystones" ] }
 }

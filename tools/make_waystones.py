@@ -42,7 +42,6 @@ EXCLUDED_ZONES = {
 MERGE_SAME_AREA_DIST = 600.0
 DUP_SUFFIX = {'ruRU': ('трактир', 'полёты'), 'enGB': ('Inn', 'Flights')}
 
-SPELL_TRANSLOCATION = 44080  # "Teleport: Zul'Aman Instance", unused; renamed by make_client_patch.py
 
 GOSSIP_TEXT = {
     'ruRU': 'Кристалл гудит тайной магией Кирин-Тора. Путник, коснувшийся его, может перенестись '
@@ -187,9 +186,6 @@ def write_sql(ws):
         f'DELETE FROM `npc_text_locale` WHERE `ID` = {NPC_ENTRY};',
         'INSERT INTO `npc_text_locale` (`ID`, `Locale`, `Text0_0`) VALUES',
         f"({NPC_ENTRY}, 'ruRU', '{esc(GOSSIP_TEXT['ruRU'])}');",
-        f'DELETE FROM `spell_script_names` WHERE `spell_id` = {SPELL_TRANSLOCATION};',
-        'INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES',
-        f"({SPELL_TRANSLOCATION}, 'spell_custom_translocation');",
         '',
         'DROP TABLE IF EXISTS `custom_waystone`;',
         'CREATE TABLE `custom_waystone` (',

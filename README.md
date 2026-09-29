@@ -14,8 +14,10 @@ Kirin Tor waycrystals: a teleport network in the spirit of Final Fantasy XIV aet
 
 ## Requirements
 
-None besides the core. The translocation spell looks right in the client only with the client patch built by
-`tools/make_client_patch.py` from your own client (game data is never shipped here).
+None besides the core. Translocation is a spell of its own, described in `data/patches.json`: the installer of
+[LonelyIce](https://github.com/LonelyIceProject/lonelyice) gives it a free spell id, adds it to the server (`spell_dbc`)
+and builds the client patch from your own client, so no game data is shipped here.
+
 ## Install
 
 This module is written for [LonelyIceProject/azerothcore-wotlk](https://github.com/LonelyIceProject/azerothcore-wotlk),
@@ -37,7 +39,7 @@ The plugin is laid out in `bin/<config>/plugins/lonelyice.waystones/`. Copy that
 
 - `client/addons/KirinTorWaystones` goes into `Interface/AddOns`.
 - `tools/make_waystones.py` regenerates the crystal spawns (`data/sql/db-world`) and the addon data from the
-  world database and the client DBCs; `tools/make_client_patch.py` builds the client patch. Both read
+  world database and the client DBCs. It reads
   `WOW_CLIENT` (game folder), `WOW_SERVER_DATA` (server data folder) and `WOW_WORLD_DB` (world.sqlite), and
   need StormLib for MPQ access.
 ## License

@@ -19,9 +19,6 @@ INSERT INTO `npc_text` (`ID`, `text0_0`, `Probability0`) VALUES
 DELETE FROM `npc_text_locale` WHERE `ID` = 9100001;
 INSERT INTO `npc_text_locale` (`ID`, `Locale`, `Text0_0`) VALUES
 (9100001, 'ruRU', 'Кристалл гудит тайной магией Кирин-Тора. Путник, коснувшийся его, может перенестись к любому кристаллу сети, на который он уже настроен.');
-DELETE FROM `spell_script_names` WHERE `spell_id` = 44080;
-INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
-(44080, 'spell_custom_translocation');
 
 DROP TABLE IF EXISTS `custom_waystone`;
 CREATE TABLE `custom_waystone` (
