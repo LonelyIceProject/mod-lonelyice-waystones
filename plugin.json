@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "lonelyice.waystones",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": { "en": "Kirin Tor waystones", "ru": "Кристаллы Кирин-Тора" },
   "description": {
     "en": "A network of teleport crystals: attune to a crystal once, then travel between the ones you know.",
