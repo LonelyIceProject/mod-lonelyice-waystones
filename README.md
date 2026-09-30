@@ -42,6 +42,13 @@ The plugin is laid out in `bin/<config>/plugins/lonelyice.waystones/`. Copy that
   world database and the client DBCs. It reads
   `WOW_CLIENT` (game folder), `WOW_SERVER_DATA` (server data folder) and `WOW_WORLD_DB` (world.sqlite), and
   need StormLib for MPQ access.
+## Support
+
+LonelyIce is free, with no ads and no paid features. If it is useful to you, you can
+[buy me a coffee](https://buymeacoffee.com/darthgelum): it pays for the server, code signing and development time.
+
+<a href="https://buymeacoffee.com/darthgelum"><img src=".github/buy-me-a-coffee.png" alt="Buy me a coffee" width="303"></a>
+
 ## License
 
 GNU General Public License v2.0 or later, see [LICENSE](LICENSE). Part of the
